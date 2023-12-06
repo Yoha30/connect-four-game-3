@@ -1,0 +1,225 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+    :root {
+        --topAnimation: '',
+    }
+
+    .main {
+        @apply w-full h-screen flex place-items-center justify-center bg-dark-purple;
+    }
+
+    .main-card {
+        @apply bg-purple md:rounded-4xl w-full md:w-[30rem] md:border-black md:border-3 md:main-box-shadow flex flex-col place-items-center justify-center gap-16 h-screen md:h-auto md:py-16;
+    }
+
+    #game-board {
+        @apply relative grid after:bg-[url('/assets/images/board-layer-white-small.svg')] md:after:bg-[url('/assets/images/board-layer-white-large.svg')] after:pointer-events-none after:z-10 after:bg-no-repeat  after:h-[19.375rem] md:after:h-[36.5rem] after:w-[20.9rem] md:after:w-[39.5rem] h-[19.375rem] md:h-[36.5rem] w-[20.9rem] md:w-[39.5rem] after:absolute before:absolute  before:bg-[url('/assets/images/board-layer-black-small.svg')] md:before:bg-[url('/assets/images/board-layer-black-large.svg')] before:bg-no-repeat before:h-[20.375rem] md:before:h-[37.5rem] before:w-[20.9rem] md:before:w-[39.5rem] place-content-center pb-4 md:pb-6;
+        grid-template-columns: repeat(7, minmax(0, 88px));
+        grid-template-rows: repeat(6, minmax(0, 88px));
+    }
+
+    @media (max-width: 576px) {
+        #game-board {
+            grid-template-columns: repeat(7, minmax(0, 2.91rem));
+            grid-template-rows: repeat(6, minmax(0, 2.91rem));
+        }
+    }
+
+    @keyframes circleAnimation {
+        0% {
+            top: 0;
+        }
+        100% {
+            top: var(--topAnimation);
+        }
+    }
+
+    .circle {
+        @apply flex cursor-pointer z-10 relative md:justify-center pl-0.5 md:pl-1;
+    }
+
+    .header {
+        @apply flex place-items-center justify-between w-full my-10 lg:my-14 w-[20.9rem] md:w-[39.5rem];
+    }
+
+    .header > p {
+        @apply rounded-large bg-dark-purple hover:bg-red duration-300 px-5 py-2 cursor-pointer
+    }
+
+    .win-circle {
+        @apply border-white border-[6px] md:border-8 rounded-full w-6 md:w-12 h-6 md:h-12;
+    }
+
+    .win-circle-container {
+        @apply w-11 md:w-[4.5rem] h-11 md:h-[4.5rem] flex place-items-center justify-center mr-[0.125rem] lg:mr-1 duration-300;
+    }
+
+    .header > p > span {
+        @apply uppercase text-white font-bold;
+    }
+
+    .game-piece {
+        @apply w-10 md:w-[75px] h-10 md:h-[75px] -z-10 bg-no-repeat absolute ;
+    }
+
+    .game-piece[data-player="1"] {
+        @apply bg-[url('/assets/images/counter-red-small.svg')] md:bg-[url('/assets/images/counter-red-large.svg')];
+    }
+
+    .game-piece[data-player="2"] {
+        @apply bg-[url('/assets/images/counter-yellow-small.svg')] md:bg-[url('/assets/images/counter-yellow-large.svg')];
+    }
+
+    .bottom-bg {
+        @apply absolute z-10 bg-dark-purple w-full bottom-0 h-56 duration-300;
+        border-top-left-radius: 3.75rem;
+        border-top-right-radius: 3.75rem;
+    }
+
+    .winner-card {
+        @apply w-[17rem] absolute bg-white rounded-large border-black border-3 main-box-shadow py-4 flex flex-col place-items-center absolute -bottom-[10.5rem] md:-bottom-36 z-40 bg-white;
+    }
+
+    .winner-card p {
+        @apply text-black text-base font-bold;
+    }
+
+    .winner-card h1 {
+        @apply text-black text-[3.5rem] font-bold;
+    }
+
+    .player-turn {
+        @apply absolute w-[12.5rem] h-44 z-40 bg-no-repeat -bottom-40 md:-bottom-32 flex flex-col place-items-center justify-center;
+    }
+
+    .player-turn[data-player="1"] {
+        @apply bg-[url('/assets/images/turn-background-red.svg')]
+    }
+
+    .player-turn[data-player="1"] p {
+        @apply text-white font-bold text-base;
+    }
+
+    .player-turn[data-player="1"] #timer {
+        @apply text-white font-bold text-[3.5rem];
+    }
+
+    .player-turn[data-player="2"] p {
+        @apply text-black font-bold text-base;
+    }
+
+    .player-turn[data-player="2"] #timer {
+        @apply text-black font-bold text-[56px];
+    }
+
+    .player-turn[data-player="2"] {
+        @apply bg-[url('/assets/images/turn-background-yellow.svg')]
+    }
+
+    .d-player-card {
+        @apply bg-white w-36 h-40 hidden lg:flex flex-col place-items-center rounded-large border-black border-3 main-box-shadow py-8 relative;
+    }
+
+    .sm-player-card {
+        @apply bg-white w-36 md:w-1/3 h-[5.5rem] flex lg:hidden flex-col place-items-center rounded-large border-black border-3 main-box-shadow py-2 relative;
+
+    }
+
+    .game-content {
+        @apply flex flex-col lg:flex-row place-items-center gap-14 justify-center z-20 relative;
+    }
+
+    .check-btn {
+        @apply absolute -translate-x-1/2 left-1/2 cursor-pointer;
+    }
+
+    .rules-card .title {
+        @apply text-[3.5rem] font-bold text-black flex justify-center uppercase;
+    }
+
+    .content {
+        @apply px-6
+    }
+
+    .content-title {
+        @apply text-purple uppercase font-bold text-xl;
+    }
+
+    .content-description {
+        @apply text-black opacity-70 font-medium
+    }
+
+    .list li {
+        @apply text-black/70 font-medium flex gap-4
+    }
+
+    .content .list span:first-child {
+        @apply text-black font-bold
+    }
+
+    .content > div {
+        @apply flex flex-col gap-4 mb-8
+    }
+
+    .btn {
+        @apply rounded-large border-black border-3 main-box-shadow flex place-items-center justify-between p-5 h-[4.5rem] mb-8
+    }
+
+    .btn span {
+        @apply font-bold text-xl uppercase ;
+    }
+
+    .btn-yellow {
+        @apply bg-yellow btn;
+    }
+
+    .btn-white {
+        @apply bg-white btn;
+    }
+
+    .btn-purple {
+        @apply bg-dark-purple border-black text-white font-bold;
+    }
+
+    .btn-red {
+        @apply bg-red border-black text-white font-bold;
+    }
+}
+
+@layer utilities {
+    @font-face {
+        font-family: SpaceGrotesk;
+        font-weight: 500;
+        font-style: normal;
+        src: url("/assets/fonts/static/SpaceGrotesk-Medium.ttf");
+    }
+    @font-face {
+        font-family: SpaceGrotesk;
+        font-weight: 700;
+        font-style: normal;
+        src: url("/assets/fonts/static/SpaceGrotesk-Bold.ttf");
+    }
+    * {
+        font-family: SpaceGrotesk;
+    }
+
+    .rounded-4xl {
+        border-radius: 2.5rem;
+    }
+
+    .rounded-large {
+        border-radius: 1.25rem;
+    }
+
+    .border-3 {
+        border-width: 3px;
+    }
+
+    .main-box-shadow {
+        box-shadow: 0px 10px 0px 0px #000;
+    }
+}
